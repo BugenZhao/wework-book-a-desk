@@ -24,6 +24,14 @@ The script uses the public `members.wework.com` member portal APIs. It can:
 SKILL.md
 agents/openai.yaml
 scripts/wework_min.py
+scripts/wework/
+  api.py
+  auth.py
+  cli.py
+  constants.py
+  http_client.py
+  keychain.py
+  utils.py
 ```
 
 ## Auth
