@@ -98,3 +98,26 @@ class HTTP:
         uuid = user_uuid_from_jwt(token)
         if uuid:
             self.headers["WeWorkUUID"] = uuid
+
+
+def set_cookie(http: HTTP, name: str, value: str, domain: str) -> None:
+    cookie = cookiejar.Cookie(
+        version=0,
+        name=name,
+        value=value,
+        port=None,
+        port_specified=False,
+        domain=domain,
+        domain_specified=True,
+        domain_initial_dot=False,
+        path="/",
+        path_specified=True,
+        secure=True,
+        expires=None,
+        discard=True,
+        comment=None,
+        comment_url=None,
+        rest={},
+        rfc2109=False,
+    )
+    http.jar.set_cookie(cookie)

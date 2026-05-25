@@ -9,7 +9,7 @@ import urllib.parse
 from dataclasses import dataclass
 
 from .constants import AUTH0_CLIENT, MEMBER_BASE
-from .http_client import HTTP
+from .http_client import HTTP, set_cookie
 from .utils import b64url, clip, code_from_location
 
 

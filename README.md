@@ -1,6 +1,6 @@
-# WeWork Codex Skill
+# Agent Skill: WeWork Book A Desk
 
-Codex skill and dependency-free Python CLI for WeWork desk booking automation.
+Agent skill and dependency-free Python CLI for WeWork desk booking automation.
 
 Detailed usage lives in [SKILL.md](SKILL.md).
 
@@ -22,4 +22,4 @@ scripts/wework_min.py
 scripts/wework/
 ```
 
-The CLI stores credentials/tokens in macOS Keychain under service `codex-wework-skill`.
+The CLI stores credentials/tokens in macOS Keychain under service `wework-book-a-desk`.

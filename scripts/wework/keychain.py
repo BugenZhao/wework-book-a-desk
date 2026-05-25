@@ -5,7 +5,7 @@ import subprocess
 import sys
 
 from .constants import KEYCHAIN_SERVICE, PASSWORD_SUFFIX, TOKEN_SUFFIX, USERNAME_SUFFIX
-from .utils import format_expiry, jwt_claims, token_expired
+from .utils import fatal, format_expiry, jwt_claims, token_expired
 
 
 def print_saved_token(account: str, token: str, source: str) -> None:
@@ -29,6 +29,9 @@ def get_usable_token(account: str) -> str:
         return token if token and not jwt_claims(token).get("exp") else ""
 
     print("stored token is missing or expired; refreshing with Keychain username/password", file=sys.stderr)
+    from .auth import authenticate
+    from .http_client import HTTP
+
     http = HTTP()
     token = authenticate(http, username, password)
     save_token_to_keychain(account, token)
@@ -115,26 +118,3 @@ def run_security(args: list[str], action: str) -> None:
     if result.returncode != 0:
         detail = (result.stderr or result.stdout).strip()
         raise RuntimeError(f"failed to {action}: {detail}")
-
-
-def set_cookie(http: HTTP, name: str, value: str, domain: str) -> None:
-    cookie = cookiejar.Cookie(
-        version=0,
-        name=name,
-        value=value,
-        port=None,
-        port_specified=False,
-        domain=domain,
-        domain_specified=True,
-        domain_initial_dot=False,
-        path="/",
-        path_specified=True,
-        secure=True,
-        expires=None,
-        discard=True,
-        comment=None,
-        comment_url=None,
-        rest={},
-        rfc2109=False,
-    )
-    http.jar.set_cookie(cookie)

@@ -3,7 +3,7 @@ AUTH0_CLIENT = (
     "eyJuYW1lIjoiQGF1dGgwL2F1dGgwLWFuZ3VsYXIiLCJ2ZXJzaW9uIjoiMS4xMS4x"
     "LmN1c3RvbSIsImVudiI6eyJhbmd1bGFyL2NvcmUiOiIxMy4xLjEifX0="
 )
-KEYCHAIN_SERVICE = "codex-wework-skill"
+KEYCHAIN_SERVICE = "wework-book-a-desk"
 DEFAULT_KEYCHAIN_ACCOUNT = "default"
 TOKEN_SUFFIX = "token"
 USERNAME_SUFFIX = "username"

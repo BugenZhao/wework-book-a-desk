@@ -1,5 +1,5 @@
 interface:
-  display_name: "WeWork"
+  display_name: "WeWork Book A Desk"
   short_description: "Book WeWork desks from the CLI"
   default_prompt: "Use $wework to dry-run or book a WeWork desk reservation."
 policy:
