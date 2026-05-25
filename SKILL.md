@@ -1,6 +1,6 @@
 ---
 name: wework
-description: Use this skill for WeWork member portal automation, especially authenticating against members.wework.com and booking or dry-running WeWork desk reservations from the command line. It includes a dependency-free Python script extracted from the public dvcrn/wework-cli flow for auth, location lookup, desk availability, quote, and book actions.
+description: Use this skill for WeWork member portal automation, especially authenticating against members.wework.com and booking or dry-running WeWork desk reservations from the command line. It includes a dependency-free Python CLI for auth, location lookup, desk availability, quote, booking, upcoming booking listing, and cancellation.
 ---
 
 # WeWork Desk Booking
@@ -13,19 +13,6 @@ description: Use this skill for WeWork member portal automation, especially auth
 - Listing WeWork locations in a city, including UUIDs for direct booking.
 - Checking desk availability for a location or all locations in a city on a given date.
 - Listing upcoming bookings and cancelling a booking with explicit confirmation.
-
-## Source Model
-
-The bundled script follows the public `dvcrn/wework-cli` flow:
-
-1. Fetch Auth0 config from `/workplaceone/api/auth0/config`.
-2. Authenticate with Auth0 password realm `id-wework`.
-3. Exchange the authorization code for Auth0 tokens.
-4. Call `/workplaceone/api/auth0/login-by-auth0-token` and use `a0token`.
-5. Add `Authorization`, `WeWorkAuth`, and `WeWorkUUID` headers.
-6. Call `/spaces/get-spaces`, then `/common-booking/quote`, then `/common-booking/`.
-
-This is not an official WeWork API contract. If WeWork changes request fields, re-check the upstream CLI or browser network trace before modifying the script.
 
 ## Script
 
@@ -163,7 +150,7 @@ python3 /Users/bugenzhao/.codex/skills/wework/scripts/wework_min.py book \
 
 ## Constraints
 
-- The script intentionally implements only the common Auth0 password/login-ticket path. If login requires MFA, CAPTCHA, SSO, or an intermediate hosted form, use the full upstream CLI or a fresh browser session instead.
+- The script intentionally implements only the common Auth0 password/login-ticket path. If login requires MFA, CAPTCHA, SSO, or a changed hosted form, use a fresh browser session or update the auth flow.
 - `auth password` stores username/password and the resolved WeWork token as macOS Keychain generic passwords under service `codex-wework-skill`; `book` uses the token if still valid and refreshes it from saved username/password if expired.
 - `auth token` stores only an existing token. If it expires and no username/password is saved, run `auth token` or `auth password` again.
 - Do not print passwords or tokens. Prefer `auth password --username ...` with the hidden password prompt, or `auth token --token ...` when the token came from an already-authenticated browser session.
